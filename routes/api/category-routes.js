@@ -40,8 +40,17 @@ router.put('/:id', (req, res) => {
       id: req.params.id,
     }
   })
-    .then((category) => res.status(200).json(category))
-    .catch((err) => res.status(500).json(err));
+    .then((category) => {
+      if (!category) {
+        res.status(404).json({ message: 'No category with this id found' });
+        return;
+      }
+      res.json(category);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err)
+    });
 });
 
 router.delete('/:id', (req, res) => {
@@ -51,8 +60,17 @@ router.delete('/:id', (req, res) => {
       id: req.params.id,
     }
   })
-  .then((category) => res.status(200).json(category))
-  .catch((err) => res.status(500).json(err));
+    .then((category) => {
+      if (!category) {
+        res.status(404).json({ message: 'No category with this id found' });
+        return;
+      }
+      res.json(category);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err)
+    });
 });
 
 module.exports = router;
