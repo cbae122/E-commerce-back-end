@@ -44,7 +44,7 @@ router.get('/:id', (req, res) => {
       console.log(err);
       res.status(400).json(err);
     });
-});;
+});
 
 // create new product
 router.post('/', (req, res) => {

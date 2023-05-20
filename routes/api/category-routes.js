@@ -22,8 +22,17 @@ router.get('/:id', (req, res) => {
     },
     include: [Product],
   })
-    .then((category) => res.json(category))
-    .catch((err) => res.status(400).json(err));
+    .then((category) => {
+      if (!category) {
+        res.status(404).json({ message: 'No category with this id found' });
+        return;
+      }
+      res.json(category);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err)
+    });
 });
 
 router.post('/', (req, res) => {
