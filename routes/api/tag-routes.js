@@ -11,10 +11,14 @@ router.get('/', (req, res) => {
       {
         model: Tag,
         through: ProductTag,
-      },
-    ],
+      }
+    ]
   })
-    .then(())
+    .then((dataTag) => res.json(dataTag))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 router.get('/:id', (req, res) => {
